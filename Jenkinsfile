@@ -36,8 +36,9 @@ pipeline {
         stage('Deploy to Cloud') {
             steps {
                 script {
-                    // Add your deployment steps here
+                    // Example: Add your deployment steps here
                     // Example: Use kubectl to deploy to a Kubernetes cluster
+                    // sh 'kubectl apply -f deployment.yaml'
                 }
             }
         }
