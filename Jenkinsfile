@@ -17,7 +17,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    dockerImage.inside {
+                    docker.image("my-app:latest").inside {
                         sh 'npm test' // Adjust this command to run your tests
                     }
                 }
@@ -27,6 +27,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        def dockerImage = docker.build("my-app:latest")
                         dockerImage.push("${env.BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
@@ -44,3 +45,4 @@ pipeline {
         }
     }
 }
+
